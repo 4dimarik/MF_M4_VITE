@@ -1,6 +1,7 @@
 import { MantineProvider, ColorSchemeProvider, Container } from '@mantine/core';
 import { AppRouter } from './context/router';
 import { useState } from 'react';
+import { AuthProvider } from './context/AuthProvider';
 
 function App() {
   const [colorScheme, setColorScheme] = useState('light');
@@ -17,7 +18,9 @@ function App() {
           withGlobalStyles
           withNormalizeCSS
         >
-          <AppRouter />
+          <AuthProvider>
+            <AppRouter />
+          </AuthProvider>
         </MantineProvider>
       </ColorSchemeProvider>
     </Container>
