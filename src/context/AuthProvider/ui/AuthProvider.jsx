@@ -1,12 +1,8 @@
-import { createContext, useContext } from 'react';
+import { createContext } from 'react';
 import { useLocalStorage } from '@mantine/hooks';
 import PropTypes from 'prop-types';
 
 const AuthContext = createContext(null);
-
-export function useAuth() {
-  return useContext(AuthContext);
-}
 
 function AuthProvider({ children }) {
   const [user, setValue, removeValue] = useLocalStorage({
@@ -35,4 +31,4 @@ function AuthProvider({ children }) {
 
 AuthProvider.propTypes = { children: PropTypes.node };
 
-export { AuthProvider };
+export { AuthProvider, AuthContext };
