@@ -7,14 +7,11 @@ import {
   Menu,
   rem,
 } from '@mantine/core';
-
 import { IconLogout, IconLogin, IconChevronDown } from '@tabler/icons-react';
+import { useAuth } from '../../../context/AuthProvider';
+import { useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
-  mainSection: {
-    paddingBottom: theme.spacing.sm,
-  },
-
   user: {
     color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
     padding: `${theme.spacing.xs} ${theme.spacing.sm}`,
@@ -30,7 +27,6 @@ const useStyles = createStyles((theme) => ({
       display: 'none',
     },
   },
-
   userActive: {
     backgroundColor:
       theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
@@ -40,6 +36,15 @@ const useStyles = createStyles((theme) => ({
 function UserMenu() {
   const { classes, cx } = useStyles();
   const [userMenuOpened, setUserMenuOpened] = useState(false);
+
+  const auth = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    auth.signout(() => navigate('/'));
+  };
+
+  console.log(auth);
 
   return (
     <Menu
@@ -56,20 +61,28 @@ function UserMenu() {
         >
           <Group spacing={7}>
             <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-              Гость
+              {auth.user ?? 'Гость'}
             </Text>
             <IconChevronDown size={rem(12)} stroke={1.5} />
           </Group>
         </UnstyledButton>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Item icon={<IconLogin size="0.9rem" stroke={1.5} />}>
-          Вход
-        </Menu.Item>
-
-        <Menu.Item icon={<IconLogout size="0.9rem" stroke={1.5} />}>
-          Logout
-        </Menu.Item>
+        {auth.user ? (
+          <Menu.Item
+            icon={<IconLogout size="0.9rem" stroke={1.5} />}
+            onClick={handleSignOut}
+          >
+            Logout
+          </Menu.Item>
+        ) : (
+          <Menu.Item
+            icon={<IconLogin size="0.9rem" stroke={1.5} />}
+            onClick={() => navigate('/login')}
+          >
+            Вход
+          </Menu.Item>
+        )}
       </Menu.Dropdown>
     </Menu>
   );

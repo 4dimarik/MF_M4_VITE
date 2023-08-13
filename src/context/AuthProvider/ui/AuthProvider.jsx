@@ -7,7 +7,7 @@ const AuthContext = createContext(null);
 function AuthProvider({ children }) {
   const [user, setValue, removeValue] = useLocalStorage({
     key: 'user',
-    defaultValue: 'anonymous',
+    defaultValue: null,
   });
 
   const signin = (newUser, callback) => {
