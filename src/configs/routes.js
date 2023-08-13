@@ -1,8 +1,6 @@
 const routes = {
   main: {
     path: '/',
-    label: 'Домой',
-    nav: { name: 'main', label: 'Домой', path: '/' },
   },
   categories: {
     path: ':category',
