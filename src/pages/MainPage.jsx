@@ -2,7 +2,7 @@ import { Flex, Image } from '@mantine/core';
 
 export default function MainPage() {
   return (
-    <Flex justify="flex-center" align="flex-start" sx={{ width: '100%' }}>
+    <Flex justify="flex-center" align="flex-start" w="100">
       <Image
         mx="auto"
         fit="contain"
