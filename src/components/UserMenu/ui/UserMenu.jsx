@@ -44,8 +44,6 @@ function UserMenu() {
     auth.signout(() => navigate('/'));
   };
 
-  console.log(auth);
-
   return (
     <Menu
       width={260}
