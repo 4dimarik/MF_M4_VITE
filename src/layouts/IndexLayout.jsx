@@ -9,8 +9,6 @@ export default function IndexLayout() {
     routes.categories.nav.variations
   ).includes(category);
 
-  console.log(Object.keys(isValidCategory));
-
   return (
     <AppShell
       padding="md"
