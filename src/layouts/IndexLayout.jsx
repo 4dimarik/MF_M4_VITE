@@ -1,8 +1,16 @@
 import { AppShell, Header } from '@mantine/core';
-import { Outlet } from 'react-router-dom';
+import { Outlet, Navigate, useParams } from 'react-router-dom';
 import { HeaderMenu } from '../components/HeaderMenu/ui/HeaderMenu';
+import { routes } from '../configs/routes';
 
 export default function IndexLayout() {
+  const { category } = useParams();
+  const isValidCategory = Object.keys(
+    routes.categories.nav.variations
+  ).includes(category);
+
+  console.log(Object.keys(isValidCategory));
+
   return (
     <AppShell
       padding="md"
@@ -20,7 +28,15 @@ export default function IndexLayout() {
         },
       })}
     >
-      <Outlet />
+      {category ? (
+        !isValidCategory ? (
+          <Navigate to="/404" replace={true} />
+        ) : (
+          <Outlet context={{ category, endpoint: category }} />
+        )
+      ) : (
+        <Outlet />
+      )}
     </AppShell>
   );
 }
