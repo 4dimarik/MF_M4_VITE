@@ -68,10 +68,8 @@ export default function CategoryPage() {
   };
   return (
     <>
-      <h2 className="text-2xl font-bold tracking-tight text-gray-900 text-center">
-        {routes.categories.nav.variations[category].label}
-      </h2>
-      <div className="w-[80%] m-auto mt-3">
+      <h2>{routes.categories.nav.variations[category].label}</h2>
+      <div>
         {isLoading ? (
           <Loader variant="bars" />
         ) : error ? (
