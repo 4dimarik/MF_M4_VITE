@@ -3,7 +3,6 @@ import { useAuth } from '../../AuthProvider';
 import PropTypes from 'prop-types';
 
 function PrivateRoute({ children }) {
-  console.log(children);
   const auth = useAuth();
   const location = useLocation();
 

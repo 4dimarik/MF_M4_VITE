@@ -1,7 +1,8 @@
 import { AppShell, Header } from '@mantine/core';
-import { Outlet, Navigate, useParams } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 import { HeaderMenu } from '../components/HeaderMenu/ui/HeaderMenu';
 import { routes } from '../configs/routes';
+import NotFoundPage from '../pages/NotFoundPage';
 
 export default function IndexLayout() {
   const { category } = useParams();
@@ -28,7 +29,7 @@ export default function IndexLayout() {
     >
       {category ? (
         !isValidCategory ? (
-          <Navigate to="/404" replace={true} />
+          <NotFoundPage />
         ) : (
           <Outlet context={{ category, endpoint: category }} />
         )
